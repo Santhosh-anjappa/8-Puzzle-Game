@@ -1,6 +1,6 @@
 # 8-Puzzle-Game
 8-puzzle game in python play in prompt
-
+<pre>
 +-----------+<br>
 |   | 1 | 2 |<br>
 +-----------+<br>
@@ -8,3 +8,4 @@
 +-----------+<br>
 | 6 | 7 | 8 |<br>
 +-----------+<br>
+</pre>
