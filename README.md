@@ -1,5 +1,6 @@
 # 8-Puzzle-Game
-8-puzzle game in python play in prompt
+8-puzzle game in python
+user can play the game in console
 <pre>
 +-----------+
 |   | 1 | 2 |
