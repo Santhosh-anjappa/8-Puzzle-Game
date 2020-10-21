@@ -1,15 +1,21 @@
 import random
+import colorama
+import msvcrt
+
+colorama.init()
 box = [[' ','1','2'],
             ['3','4','5'],
             ['6','7','8']]
 
 def display():
+	s = ''
 	for i in range(3):
-		print(" +-----------+")
+		s += " +-----------+\n"
 		for j in range(3):
-			print(" | "+str(box[i][j]),end='')
-		print(" |")
-	print(" +-----------+")
+			s += " | "+str(box[i][j])
+		s += " |\n"
+	s += " +-----------+\n"
+	print(s)
 #display()
 
 def shuffle():
@@ -37,7 +43,8 @@ def moveright(pointer):
 	j = pointer[1]
 	try:
 		box[i][j] = box[i][j-1]
-		j -= 1
+		if(j > 0):
+			j -= 1
 	except IndexError:
 		pass
 	box[i][j] = ' '
@@ -59,7 +66,8 @@ def movedown(pointer):
 	j = pointer[1]
 	try:
 		box[i][j] = box[i-1][j]
-		i -= 1
+		if(i > 0):
+			i -= 1
 	except IndexError:
 		pass
 	box[i][j] = ' '
@@ -80,15 +88,17 @@ def takeaction(action):
 	elif(action == down):
 		# if s is pressed
 		pointer = movedown(pointer)
-left = 'a'
-right = 'd'
-up = 'w'
-down = 's'
+left = b'a'
+right = b'd'
+up = b'w'
+down = b's'
 pointer = [0,0]
 shuffle()
-display()
-action = input()
-while(action != 'q'):
-	takeaction(action)
+while(True):
 	display()
-	action = input()
+	action = msvcrt.getch()
+	if(action == b'q'):
+		break
+		
+	print("\033[A"*9)
+	takeaction(action)
