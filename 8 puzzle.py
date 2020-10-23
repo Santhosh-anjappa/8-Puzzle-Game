@@ -1,30 +1,35 @@
 import random
 import colorama
 import msvcrt
-
+import math
+n = int(input("Enter Board Size: "))	# Puzzle board size
 colorama.init()
-box = [[' ','1','2'],
-            ['3','4','5'],
-            ['6','7','8']]
+
+box = [[str(i) for i in range(j,j+n)] for j in range(1,n*n,n)]
+box[-1][-1] == ' '
 
 def display():
+	ntimes = math.floor(math.log10(n*n))
 	s = ''
-	for i in range(3):
-		s += " +-----------+\n"
-		for j in range(3):
-			s += " | "+str(box[i][j])
+	brd = "---" + "-"*ntimes + "+"
+	line = " +" + brd*n + "\n"
+	for i in range(n):
+		s += line
+		
+		for j in range(n):
+			s += " | {0:>{1}s}".format(str(box[i][j]), ntimes+1)
 		s += " |\n"
-	s += " +-----------+\n"
+	s += line
 	print(s)
 #display()
 
 def shuffle():
-	n = random.randint(50,100)
+	n = random.randint(50,250)
 	i = 0
 	while(i< n):
-		action = random.randint(97,100)
-		takeaction(chr(action))
-		#display()
+		# action = random.randint(97,100)
+		action = random.choice([left,right,up,down])
+		takeaction(action)
 		i += 1
 
 def moveleft(pointer):
@@ -92,7 +97,7 @@ left = b'a'
 right = b'd'
 up = b'w'
 down = b's'
-pointer = [0,0]
+pointer = [n-1,n-1]
 shuffle()
 while(True):
 	display()
