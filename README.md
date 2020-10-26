@@ -10,3 +10,4 @@ user can play the game in console
  | 7 | 8 |   |
  +---+---+---+
 </pre>
+![](Images/n_puzzle_a_star.gif)
