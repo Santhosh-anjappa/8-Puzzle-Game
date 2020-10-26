@@ -32,7 +32,9 @@ class Box:
 		if(self.checkBoundry(i, j+1)):
 			# swap blank
 			self.box[i][j], self.box[i][j+1] = self.box[i][j+1], self.box[i][j]
-			self.bpos[1] += 1	
+			self.bpos[1] += 1
+			return True
+		return False
 
 	def moveright(self,):
 		i = self.bpos[0]
@@ -41,6 +43,8 @@ class Box:
 			# swap blank
 			self.box[i][j], self.box[i][j-1] = self.box[i][j-1], self.box[i][j]
 			self.bpos[1] -= 1
+			return True
+		return False
 
 	def moveup(self,):
 		i = self.bpos[0]
@@ -49,6 +53,8 @@ class Box:
 			# swap blank
 			self.box[i][j], self.box[i+1][j] = self.box[i+1][j], self.box[i][j]
 			self.bpos[0] += 1
+			return True
+		return False
 
 	def movedown(self,):
 		i = self.bpos[0]
@@ -57,16 +63,18 @@ class Box:
 			# swap blank
 			self.box[i][j], self.box[i-1][j] = self.box[i-1][j], self.box[i][j]
 			self.bpos[0] -= 1
+			return True
+		return False
 
 	def takeaction(self, action):
 		if(action == self.left):
-			self.moveleft()
+			return self.moveleft()
 		elif(action == self.right):
-			self.moveright()
+			return self.moveright()
 		elif(action == self.up):
-			self.moveup()
+			return self.moveup()
 		elif(action == self.down):
-			self.movedown()
+			return self.movedown()
 
 	def shuffle(self, ):
 		n = random.randint(50,250)
@@ -80,11 +88,11 @@ class Box:
 		ntimes = math.floor(math.log10(self.size*self.size))
 		s = ''
 		brd = "---" + "-"*ntimes + "+"
-		line = " +" + brd*n + "\n"
-		for i in range(n):
+		line = " +" + brd*self.size + "\n"
+		for i in range(self.size):
 			s += line
 			
-			for j in range(n):
+			for j in range(self.size):
 				s += " | {0:>{1}s}".format(str(self.box[i][j]), ntimes+1)
 			s += " |\n"
 		s += line
